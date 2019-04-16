@@ -1,0 +1,18 @@
+version: '3'
+services:
+  app:
+    build: .
+    command: bash -c "bundle exec hanami server --host=0.0.0.0 --port=2300"
+    volumes:
+      - .:/app
+    ports:
+      - "2300:2300"
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+volumes:
+  pgdata:
