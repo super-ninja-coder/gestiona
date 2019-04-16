@@ -1,0 +1,3 @@
+project=gestiona
+test=rspec
+template=erb
