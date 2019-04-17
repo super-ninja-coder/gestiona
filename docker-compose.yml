@@ -3,8 +3,10 @@ services:
   app:
     build: .
     command: bash -c "bundle exec hanami server --host=0.0.0.0 --port=2300"
+    environment:
+      HANAMI_ENV: test
     volumes:
-      - .:/app
+      - $PWD:/app
     ports:
       - "2300:2300"
     depends_on:
