@@ -1,0 +1,28 @@
+version: 2
+jobs:
+  build:
+    machine: true
+
+    steps:
+      - checkout
+
+      - run:
+          name: Install Docker Compose
+          command: |
+            curl -L https://github.com/docker/compose/releases/download/1.24.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+            chmod +x ~/docker-compose
+            sudo mv ~/docker-compose /usr/local/bin/docker-compose
+
+      - run:
+          name: Start container
+          command: |
+            set -x
+            docker-compose up -d
+
+      - run:
+          name: Set up database
+          command: docker-compose exec app bundle exec hanami db prepare
+
+      - run:
+          name: Run test
+          command: docker-compose exec app bundle exec rspec

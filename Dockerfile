@@ -2,6 +2,7 @@ FROM ruby:2.6.2-alpine3.9
 
 RUN mkdir /app
 WORKDIR /app
+ENV HANAMI_ENV=test
 
 RUN apk add --update \
     build-base libxml2-dev libxslt-dev libstdc++ tzdata openssl-dev \
